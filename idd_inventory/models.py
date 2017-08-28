@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Vendor(models.model):
+class Vendor(models.Model):
     name = models.CharField(max_length=100)
 
 
