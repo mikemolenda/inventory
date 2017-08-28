@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'inventory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'iddinventory.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'idd_inventory.sqlite3'),
     }
 }
 
