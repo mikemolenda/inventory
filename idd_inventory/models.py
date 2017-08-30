@@ -3,7 +3,16 @@ from django.db import models
 
 class Vendor(models.Model):
     name = models.CharField()
-    vendor_website = models.URLField()
+    website = models.URLField(blank=True, null=True)
+    comments = models.CharField(max_length=400, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Manufacturer(models.Model):
+    name = models.CharField()
+    website = models.URLField(blank=True, null=True)
     comments = models.CharField(max_length=400, blank=True, null=True)
 
     def __str__(self):
@@ -11,14 +20,15 @@ class Vendor(models.Model):
 
 
 class Product(models.Model):
-    manufacturer = models.CharField()
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.PROTECT)
     model_name = models.CharField()
     model_no = models.CharField(blank=True, null=True)
-    description = models.CharField(blank=True, null=True)
     image = models.ImageField(upload_to='../images/items', blank=True, null=True)
+    support_website = models.URLField(blank=True, null=True)
+    comments = models.CharField(max_length=400, blank=True, null=True)
 
     def __str__(self):
-        return self.manufacturer + ' ' + self.model_name
+        return str(self.manufacturer) + ' ' + self.model_name
 
 
 class Asset(models.Model):
