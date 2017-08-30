@@ -44,7 +44,7 @@ class Asset(models.Model):
     comments = models.CharField(max_length=400, blank=True, null=True)
 
     def __str__(self):
-        return str(self.product) + ' ' + str(self.id)
+        return str(self.product) + ' ' + str(self.product.id)
 
 
 class Category(models.Model):
@@ -60,5 +60,5 @@ class AssetCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
     def __str__(self):
-        return str(self.asset) + ': ' + str(self.category)
+        return str(self.asset) + ', ' + str(self.category)
 
