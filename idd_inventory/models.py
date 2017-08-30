@@ -3,13 +3,22 @@ from django.db import models
 
 class Vendor(models.Model):
     name = models.CharField(max_length=100)
+    vendor_website = models.URLField()
+    comments = models.CharField(max_length=400, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Product(models.Model):
     manufacturer = models.CharField(max_length=100)
+    model_name = models.CharField(max_length=100)
     model_no = models.CharField(max_length=100, blank=True, null=True)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True, null=True)
     image = models.ImageField(upload_to='../images/items', blank=True, null=True)
+
+    def __str__(self):
+        return self.manufacturer + ' ' + self.model_name
 
 
 class Asset(models.Model):
@@ -24,12 +33,21 @@ class Asset(models.Model):
     storage_location = models.CharField(max_length=200, blank=True, null=True)
     comments = models.CharField(max_length=400, blank=True, null=True)
 
+    def __str__(self):
+        return str(self.product) + ' ' + str(self.id)
+
 
 class Category(models.Model):
     label = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.label
 
 
 class AssetCategory(models.Model):
     asset = models.ForeignKey(Asset, on_delete=models.PROTECT)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return str(self.asset) + ': ' + str(self.category)
 
